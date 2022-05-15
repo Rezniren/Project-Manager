@@ -23,8 +23,6 @@ public class Bug {
     @Column(name = "started")
     private String started;
 
-
-
     @Column(name = "finished")
     private String finished;
 
