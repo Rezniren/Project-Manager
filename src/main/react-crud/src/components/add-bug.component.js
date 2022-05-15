@@ -6,13 +6,17 @@ export default class AddG extends Component {
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeTag = this.onChangeTag.bind(this);
+        this.onChangeStarted = this.onChangeStarted.bind(this);
+        this.onChangeStarted = this.onChangeStarted.bind(this);
         this.saveG = this.saveG.bind(this);
         this.newG = this.newG.bind(this);
         this.state = {
             id: null,
             name: "",
             description: "",
-            tag: ""
+            tag: "",
+            started: "",
+            finished: "",
         };
     }
     onChangeName(e) {
@@ -30,11 +34,23 @@ export default class AddG extends Component {
             tag: e.target.value
         });
     }
+    onChangeStarted(e) {
+        this.setState({
+            started: e.target.value
+        })
+    }
+    onChangeFinished(e) {
+        this.setState({
+            finished: e.target.value
+        })
+    }
     saveG() {
         var data = {
             name: this.state.name,
             description: this.state.description,
-            tag: this.state.tag
+            tag: this.state.tag,
+            started: this.state.started,
+            finished: this.state.finished
         };
         GDataService.create(data)
             .then(response => {
@@ -42,7 +58,9 @@ export default class AddG extends Component {
                     id: response.data.id,
                     name: response.data.name,
                     description: response.data.description,
-                    tag:response.data.tag
+                    tag:response.data.tag,
+                    started:response.data.started,
+                    finished:response.data.finished
                 });
                 console.log(response.data);
             })
@@ -54,7 +72,9 @@ export default class AddG extends Component {
         this.setState({
             id: null,
             name: "",
-            description: ""
+            description: "",
+            started: "",
+            finished: ""
         });
     }
     render() {
@@ -64,12 +84,13 @@ export default class AddG extends Component {
                 {this.state.submitted ? (
                     <div>
                         <h4>You submitted successfully!</h4>
-                        <button className="btn2 btn-success" onClick={this.newG}>
+                        <button className="btn btn-success" onClick={this.newG}>
                             Add
                         </button>
                     </div>
                 ) : (
-                    <div>
+                    <div className="boardCard">
+                        <h4 className="title-center">Card Creation</h4>
                         <div className="form-group">
                             <label htmlFor="name">Name</label>
                             <input
@@ -106,7 +127,31 @@ export default class AddG extends Component {
                                 name="tag"
                             />
                         </div>
-                        <button onClick={this.saveG} className="btn2 btn-success">
+                        <div className="form-group">
+                            <label htmlFor="started">Started</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="started"
+                                required
+                                value={this.state.started}
+                                onChange={this.onChangeStarted}
+                                name="started"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="finished">Finished</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="finished"
+                                required
+                                value={this.state.finished}
+                                onChange={this.onChangeFinished}
+                                name="finished"
+                            />
+                        </div>
+                        <button onClick={this.saveG} className="btn btn-success">
                             Submit
                         </button>
                     </div>

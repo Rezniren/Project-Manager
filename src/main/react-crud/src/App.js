@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { Routes, Link, Route } from "react-router-dom";
+import { Routes, Link, Route, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import AddBug from "./components/add-bug.component";
 import Bug from "./components/bug.component";
 import BugsList from "./components/bugs-list.component";
+
+
 
 class App extends Component {
   render() {
@@ -12,12 +14,12 @@ class App extends Component {
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <a href="/bugs" className="navbar-brand">
-         Rezniren
+         Project Management
         </a>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link to={"/bugs"} className="nav-link">
-              Bugs
+              Board
             </Link>
           </li>
           <li className="nav-item">
@@ -32,7 +34,7 @@ class App extends Component {
           <Route exact path="/" element={<BugsList/>} />
           <Route exact path="bugs" element={<BugsList/>} />
           <Route exact path="/add" element={<AddBug/>} />
-          <Route path="/bugs/:id" element={<Bug/>} />
+          <Route path="bugs/:id"  element={<Bug/>}/>
         </Routes>
       </div>
     </div>

@@ -21,10 +21,6 @@ public class BugController {
     @Autowired
     public BugsRepository bugsRepository;
 
-    //@GetMapping("/bugs")
-    //public List<Bug> getAllBugs() {
-    //return bugsRepository.findAll();
-    //}
 
     @GetMapping("/bugs")
     public ResponseEntity<List<Bug>> getAllBugs(@RequestParam(required = false) String name) {
@@ -58,7 +54,7 @@ public class BugController {
     public ResponseEntity<Bug> createBug(@RequestBody Bug bug) {
         try {
             Bug _bug = bugsRepository
-                    .save(new Bug(bug.getName(), bug.getDescription(), bug.getTag()));
+                    .save(new Bug(bug.getName(), bug.getDescription(), bug.getTag(), bug.getStarted(), bug.getFinished()));
             return new ResponseEntity<>(_bug, HttpStatus.CREATED);
         } catch (Exception E) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,6 +69,8 @@ public class BugController {
             _bug.setName(bug.getName());
             _bug.setDescription(bug.getDescription());
             _bug.setTag(bug.getTag());
+            _bug.setStarted((bug.getStarted()));
+            _bug.setFinished(bug.getFinished());
             return new ResponseEntity<>(bugsRepository.save(_bug), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -98,43 +96,4 @@ public class BugController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-
-
-
-
-
-
-/*
-    public List<Bug> bugList = new ArrayList<>(); // Create a stack that holds all the Bug Data
-    List<String> categories = new ArrayList<>(); // Create a stack that holds the card categories
-
-    @GetMapping("/CreateBugs")
-    @ResponseBody
-    public String home(@RequestParam(value = "name", defaultValue= "World") String name) {
-
-        // Generate Test Categories
-        categories.add("Stories");
-        categories.add("TODO");
-        categories.add("Active");
-        categories.add("Complete");
-        // Generate Test Bugs to populate stack
-        for (int i = 1; i < 26; i++) {
-
-            String tag;
-            if (i % 3 == 0) {
-                tag = "Active";
-            } else if (i % 2 == 0) {
-                tag = "Complete";
-            } else {
-                tag = "TODO";
-            }
-
-            Bug bug = new Bug("Bug " + i, "Description " + i, tag);
-            bugList.add(bug);
-        }
-
-        return (String.format("Hello %s!", name) +  "\n" + bugList + categories.get(0));
-    }*/
 }

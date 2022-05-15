@@ -19,7 +19,7 @@ class BugDataService {
         return http.delete(`/bugs`);
     }
     findByName(name) {
-        return http.get(`/bugs?title=${name}`);
+        return http.get(`/bugs?name=${name}`);
     }
 }
 export default new BugDataService();

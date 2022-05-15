@@ -1,12 +1,24 @@
 body {
-  background-color: #4c566a;
+  font-family: "MesloLGS NF", serif;
+  background-color: #2e3440;
   color: #e5e9f0;
 }
+
+.navbar {
+   background-color: #3b4252;
+ }
+.navbar-brand {
+  font-family: "Herculanum", "Comic Code", serif;
+  padding-left: 15px;
+  color: #bf616a;
+}
+
 .list {
   text-align: left;
   max-width: 750px;
   margin: auto;
 }
+
 .submit-form {
   max-width: 300px;
   margin: auto;
@@ -15,26 +27,66 @@ body {
   max-width: 300px;
   margin: auto;
 }
-.navbar-brand {
-  font-family: "Comic Code", serif;
-  padding-left: 15px;
-  color: #bf616a;
+.form-control {
+  background-color: #d8dee9;
+}
+.form-control:focus {
+   box-shadow: none;
+ }
+
+.boardCard {
+
+  background-color: #4c566a;
+  color: #d8dee9;
+  border-radius: .25rem;
+  padding: 8px;
+  filter: drop-shadow(4px 4px 4px #3b4252);
+}
+.title-center {
+  text-align: center;
 }
 
-.btn2 {
-  margin-top: 20px;
-  background-color: #88c0d0;
-  border-color: #88c0d0;
-  color: #2e3440;
-  border-radius: 6px;
-}
 .list-group-item {
-  background-color: #88c0d0;
-  color: #2e3440;
-  font-family: "Comic Code", "Fantasque Sans Mono", sans-serif;
+  background-color: #3b4252;
+  color: #d8dee9;
+  font-family:  "MesloLGS NF", "Comic Code", "Fantasque Sans Mono", sans-serif;
   font-weight: bold;
 }
+.list-group-item.active {
+  background-color: #5e81ac;
+  border-color: transparent;
+}
+
 .badge {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  border-radius: .25rem;
+  margin-top: 8px;
   background-color: #88c0d0;
+  border-color: transparent;
   color: #2e3440;
+}
+
+.btn {
+   background-color: #88c0d0;
+   color: #2e3440;
+   //margin-top: 8px;
+   margin-right: 5px;
+ }
+.btn-success {
+  margin-top: 8px;
+  border-color: transparent;
+}
+.btn-success:hover {
+  background-color: #a3be8c;
+  border-color: transparent;
+}
+.btn-danger {
+  margin-top: 8px;
+  background-color: #bf616a;
+  border-color: transparent;
+}
+.btn-danger:hover {
+  background-color: #d08770;
+  border-color: transparent;
 }

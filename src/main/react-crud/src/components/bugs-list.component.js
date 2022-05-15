@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import BugDataService from "../services/bug.service";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+
+
+
+
 export default class BugsList extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +20,7 @@ export default class BugsList extends Component {
             currentIndex: -1,
             searchName: ""
         };
+
     }
     componentDidMount() {
         this.retrieveBugs();
@@ -72,7 +77,8 @@ export default class BugsList extends Component {
             .catch(e => {
                 console.log(e);
             });
-    }
+        }
+
     render() {
         const { searchName, bugs, currentBug, currentIndex } = this.state;
         return (
@@ -98,7 +104,7 @@ export default class BugsList extends Component {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <h4>Bugs List</h4>
+                    <h4>Card List</h4>
                     <ul className="list-group">
                         {bugs &&
                             bugs.map((bug, index) => (
@@ -114,46 +120,57 @@ export default class BugsList extends Component {
                                 </li>
                             ))}
                     </ul>
-                    <button
-                        className="m-3 btn2 btn-sm btn-danger"
-                        onClick={this.removeAllBugs}
-                    >
-                        Remove All
-                    </button>
                 </div>
                 <div className="col-md-6">
                     {currentBug ? (
-                        <div>
-                            <h4>Bug</h4>
+                        <div className="boardCard">
+                            <h4>Card</h4>
                             <div>
                                 <label>
                                     <strong>Name:</strong>
                                 </label>{" "}
                                 {currentBug.name}
                             </div>
+                            <br/>
                             <div>
                                 <label>
                                     <strong>Description:</strong>
                                 </label>{" "}
                                 {currentBug.description}
                             </div>
+                            <br/>
                             <div>
                                 <label>
                                     <strong>Tag:</strong>
                                 </label>{" "}
                                 {currentBug.tag}
                             </div>
+                            <br/>
+                            <div>
+                                <label>
+                                    <strong>Started:</strong>
+                                </label>{" "}
+                                {currentBug.started}
+                            </div>
+                            <div>
+                                <label>
+                                    <strong>Finished:</strong>
+                                </label>{" "}
+                                {currentBug.finished}
+                            </div>
                             <Link
                                 to={"/bugs/" + currentBug.id}
+
                                 className="badge badge-warning"
                             >
                                 Edit
                             </Link>
+
                         </div>
                     ) : (
                         <div>
                             <br />
-                            <p>Please click on a Bug...</p>
+                            <p>Please click on a Card Name...</p>
                         </div>
                     )}
                 </div>
