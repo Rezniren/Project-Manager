@@ -40,7 +40,6 @@ body {
   color: #d8dee9;
   border-radius: .25rem;
   padding: 8px;
-  filter: drop-shadow(4px 4px 4px #3b4252);
 }
 .title-center {
   text-align: center;
@@ -70,7 +69,6 @@ body {
 .btn {
    background-color: #88c0d0;
    color: #2e3440;
-   //margin-top: 8px;
    margin-right: 5px;
  }
 .btn-success {

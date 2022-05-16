@@ -137,7 +137,7 @@ class Bug extends Component {
         BugDataService.delete(this.state.currentBug.id)
             .then(response => {
                 console.log(response.data);
-                this.props.history.push('/bugs')
+                this.props.history.push('/board')
             })
             .catch(e => {
                 console.log(e);
@@ -189,7 +189,7 @@ class Bug extends Component {
                                     className="form-control"
                                     id="started"
                                     value={currentBug.started}
-                                    onChange={this.onChangeTag}
+                                    onChange={this.onChangeStarted}
                                 />
                             </div>
                             <div className="form-group">

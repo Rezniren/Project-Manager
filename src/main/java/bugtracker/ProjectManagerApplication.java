@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class BugTrackerApplication {
+public class ProjectManagerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BugTrackerApplication.class, args);
+        SpringApplication.run(ProjectManagerApplication.class, args);
     }
 }

@@ -5,8 +5,8 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "bugs")
-public class Bug {
+@Table(name = "cards")
+public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -29,11 +29,11 @@ public class Bug {
 
 
     // This is for when a bug is initialized with no data
-    public Bug() {
+    public Card() {
     }
 
     // This is for when a bug is initialized with all necessary data
-    public Bug(String name, String description, String tag, String started, String finished) {
+    public Card(String name, String description, String tag, String started, String finished) {
         super();
         this.name = name;
         this.description = description;

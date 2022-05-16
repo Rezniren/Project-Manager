@@ -13,12 +13,12 @@ class App extends Component {
     return(
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <a href="/bugs" className="navbar-brand">
+        <a href="/board" className="navbar-brand">
          Project Management
         </a>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
-            <Link to={"/bugs"} className="nav-link">
+            <Link to={"/board"} className="nav-link">
               Board
             </Link>
           </li>
@@ -32,9 +32,9 @@ class App extends Component {
       <div className="container mt-3">
         <Routes>
           <Route exact path="/" element={<BugsList/>} />
-          <Route exact path="bugs" element={<BugsList/>} />
+          <Route exact path="board" element={<BugsList/>} />
           <Route exact path="/add" element={<AddBug/>} />
-          <Route path="bugs/:id"  element={<Bug/>}/>
+          <Route path="board/:id"  element={<Bug/>}/>
         </Routes>
       </div>
     </div>

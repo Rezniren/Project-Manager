@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import BugDataService from "../services/bug.service";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
@@ -10,6 +10,9 @@ export default class BugsList extends Component {
         super(props);
         this.onChangeSearchName = this.onChangeSearchName.bind(this);
         this.retrieveBugs = this.retrieveBugs.bind(this);
+
+        this.generateTags = this.generateTags.bind(this);
+
         this.refreshList = this.refreshList.bind(this);
         this.setActiveBug = this.setActiveBug.bind(this);
         this.removeAllBugs = this.removeAllBugs.bind(this);
@@ -18,7 +21,8 @@ export default class BugsList extends Component {
             bugs: [],
             currentBug: null,
             currentIndex: -1,
-            searchName: ""
+            searchName: "",
+            tags: []
         };
 
     }
@@ -43,7 +47,15 @@ export default class BugsList extends Component {
                 console.log(e);
             });
     }
-    refreshList() {
+
+    generateTags() {
+        {this.tags = (this.bugs.map((bug, index)=> (<tr key={index}><td>{bug.tag}</td></tr>)))}
+        console.log(this.tags);
+    }
+
+
+
+refreshList() {
         this.retrieveBugs();
         this.setState({
             currentBug: null,
@@ -105,6 +117,7 @@ export default class BugsList extends Component {
                 </div>
                 <div className="col-md-6">
                     <h4>Card List</h4>
+
                     <ul className="list-group">
                         {bugs &&
                             bugs.map((bug, index) => (
@@ -159,7 +172,7 @@ export default class BugsList extends Component {
                                 {currentBug.finished}
                             </div>
                             <Link
-                                to={"/bugs/" + currentBug.id}
+                                to={"/board/" + currentBug.id}
 
                                 className="badge badge-warning"
                             >

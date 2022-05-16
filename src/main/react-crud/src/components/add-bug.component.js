@@ -10,14 +10,17 @@ export default class AddG extends Component {
         this.onChangeStarted = this.onChangeStarted.bind(this);
         this.saveG = this.saveG.bind(this);
         this.newG = this.newG.bind(this);
+        const today = new Date(),
+            date = (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getFullYear();
         this.state = {
             id: null,
             name: "",
             description: "",
             tag: "",
-            started: "",
+            started: date,
             finished: "",
         };
+
     }
     onChangeName(e) {
         this.setState({
@@ -45,7 +48,7 @@ export default class AddG extends Component {
         })
     }
     saveG() {
-        var data = {
+        let data = {
             name: this.state.name,
             description: this.state.description,
             tag: this.state.tag,
