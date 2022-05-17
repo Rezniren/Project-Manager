@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import BugDataService from "../services/bug.service";
 
 export function withRouter(Children){
     return(props)=>{
-
         const match  = {params: useParams()};
         return <Children {...props}  match = {match}/>
     }
@@ -137,7 +136,10 @@ class Bug extends Component {
         BugDataService.delete(this.state.currentBug.id)
             .then(response => {
                 console.log(response.data);
-                this.props.history.push('/board')
+                this.setState({
+                    message: "The Card was deleted successfully!"
+                });
+
             })
             .catch(e => {
                 console.log(e);

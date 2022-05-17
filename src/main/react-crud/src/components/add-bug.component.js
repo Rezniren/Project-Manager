@@ -19,6 +19,7 @@ export default class AddG extends Component {
             tag: "",
             started: date,
             finished: "",
+            submitted: false
         };
 
     }
@@ -63,7 +64,8 @@ export default class AddG extends Component {
                     description: response.data.description,
                     tag:response.data.tag,
                     started:response.data.started,
-                    finished:response.data.finished
+                    finished:response.data.finished,
+                    submitted: true
                 });
                 console.log(response.data);
             })
@@ -77,7 +79,8 @@ export default class AddG extends Component {
             name: "",
             description: "",
             started: "",
-            finished: ""
+            finished: "",
+            submitted: false
         });
     }
     render() {

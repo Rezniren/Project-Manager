@@ -45,6 +45,15 @@ body {
   text-align: center;
 }
 
+.CategoryList {
+  background-color: #434c5e;
+  padding: 8px;
+  border-radius: .25rem;
+  margin-top: 8px;
+  list-style: none;
+}
+
+
 .list-group-item {
   background-color: #3b4252;
   color: #d8dee9;

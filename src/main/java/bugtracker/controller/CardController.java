@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
@@ -23,13 +24,15 @@ public class CardController {
 
 
     @GetMapping("/board")
-    public ResponseEntity<List<Card>> getAllCards(@RequestParam(required = false) String name) {
+    public ResponseEntity<List<Card>> getAllCards(@RequestParam(required = false) String name, @RequestParam(required = false) String tag) {
         try {
             List<Card> cards = new ArrayList<Card>();
-            if (name == null) {
+            if (name == null && tag == null) {
                 cardsRepository.findAll().forEach(cards::add);
-            } else {
+            } else if (name != null && tag == null){
                 cardsRepository.findByNameContaining(name).forEach(cards::add);
+            } else {
+                cardsRepository.findByTag(tag).forEach(cards::add);
             }
             if (cards.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -97,6 +100,22 @@ public class CardController {
         }
     }
 
+    @PutMapping("/board/tags")
+    public List<String> getTags(@RequestBody ArrayList<Card> cards) {
+
+        System.out.println(cards.size());
+        List<String> tags = new ArrayList<>();
+        for (Card card : cards) {
+            String tag = card.getTag();
+            //System.out.println(tag);
+            if (!tags.contains(card.getTag())) {
+                tags.add(tag);
+            }
+
+        }
+        //System.out.println(cards);
+        return tags;
+    }
 
 
 }

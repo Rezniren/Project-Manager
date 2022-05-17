@@ -11,7 +11,9 @@ export default class BugsList extends Component {
         this.onChangeSearchName = this.onChangeSearchName.bind(this);
         this.retrieveBugs = this.retrieveBugs.bind(this);
 
+
         this.generateTags = this.generateTags.bind(this);
+
 
         this.refreshList = this.refreshList.bind(this);
         this.setActiveBug = this.setActiveBug.bind(this);
@@ -40,22 +42,33 @@ export default class BugsList extends Component {
             .then(response => {
                 this.setState({
                     bugs: response.data
+
                 });
-                console.log(response.data);
+                this.generateTags(response.data)
+                //console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+
+    }
+
+    generateTags(data) {
+        BugDataService.getTags(data)
+            .then(response => {
+                this.setState({
+                    tags: response.data
+                });
+                //console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
             });
     }
 
-    generateTags() {
-        {this.tags = (this.bugs.map((bug, index)=> (<tr key={index}><td>{bug.tag}</td></tr>)))}
-        console.log(this.tags);
-    }
 
 
-
-refreshList() {
+    refreshList() {
         this.retrieveBugs();
         this.setState({
             currentBug: null,
@@ -92,7 +105,8 @@ refreshList() {
         }
 
     render() {
-        const { searchName, bugs, currentBug, currentIndex } = this.state;
+        const { searchName, currentBug, currentIndex, tags} = this.state;
+        let { bugs } = this.state;
         return (
             <div className="list row">
                 <div className="col-md-8">
@@ -116,23 +130,39 @@ refreshList() {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <h4>Card List</h4>
+
+
 
                     <ul className="list-group">
-                        {bugs &&
-                            bugs.map((bug, index) => (
-                                <li
-                                    className={
-                                        "list-group-item " +
-                                        (index === currentIndex ? "active" : "")
-                                    }
-                                    onClick={() => this.setActiveBug(bug, index)}
-                                    key={index}
-                                >
-                                    {bug.name}
+                        {tags &&
+                            tags.map((tag, index) => (
+                                <li className="CategoryList" key={index}>
+
+                                    <h4>{tag}</h4>
+
+                                    <ul className="list-group">
+
+                                    {bugs &&
+                                        bugs.filter(bug => bug.tag === tag).map((bug, indexed) => (
+                                            <li
+                                                className={
+                                                    "list-group-item " +
+                                                    (tag + indexed === currentIndex ? "active" : "")
+                                                }
+                                                onClick={() => this.setActiveBug(bug, tag + indexed)}
+                                                key={tag + indexed}>
+
+                                                {bug.name}
+
+                                            </li>
+                                        ))}
+                                </ul>
                                 </li>
                             ))}
                     </ul>
+
+
+
                 </div>
                 <div className="col-md-6">
                     {currentBug ? (
@@ -152,16 +182,16 @@ refreshList() {
                                 {currentBug.description}
                             </div>
                             <br/>
-                            <div>
+                            {<div>
                                 <label>
                                     <strong>Tag:</strong>
                                 </label>{" "}
                                 {currentBug.tag}
-                            </div>
+                            </div>}
                             <br/>
                             <div>
                                 <label>
-                                    <strong>Started:</strong>
+                                    <strong>Created:</strong>
                                 </label>{" "}
                                 {currentBug.started}
                             </div>

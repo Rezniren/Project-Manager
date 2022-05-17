@@ -21,5 +21,16 @@ class BugDataService {
     findByName(name) {
         return http.get(`/board?name=${name}`);
     }
+
+
+
+    findByTag(tag) {
+        return http.get(`/board?tag=${tag}`);
+    }
+    getTags(data) {
+        console.log(data);
+        return http.put('board/tags', data);
+    }
+
 }
 export default new BugDataService();
