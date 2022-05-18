@@ -1,4 +1,4 @@
-package bugtracker.model;
+package projectmanager.model;
 
 
 import javax.persistence.*;

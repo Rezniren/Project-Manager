@@ -1,5 +1,5 @@
 import http from "../http-common";
-class BugDataService {
+class CardDataService {
     getAll() {
         return http.get("/board");
     }
@@ -28,9 +28,8 @@ class BugDataService {
         return http.get(`/board?tag=${tag}`);
     }
     getTags(data) {
-        console.log(data);
         return http.put('board/tags', data);
     }
 
 }
-export default new BugDataService();
+export default new CardDataService();

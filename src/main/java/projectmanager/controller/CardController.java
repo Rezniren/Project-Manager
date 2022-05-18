@@ -1,7 +1,7 @@
-package bugtracker.controller;
+package projectmanager.controller;
 
-import bugtracker.model.Card;
-import bugtracker.repository.CardsRepository;
+import projectmanager.model.Card;
+import projectmanager.repository.CardsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = {"http://localhost:8081", "http://192.168.1.65:8081"})
 @RestController
 @RequestMapping("/api")
 public class CardController {
@@ -24,7 +24,8 @@ public class CardController {
 
 
     @GetMapping("/board")
-    public ResponseEntity<List<Card>> getAllCards(@RequestParam(required = false) String name, @RequestParam(required = false) String tag) {
+    public ResponseEntity<List<Card>> getAllCards(@RequestParam(required = false) String name,
+                                                  @RequestParam(required = false) String tag) {
         try {
             List<Card> cards = new ArrayList<Card>();
             if (name == null && tag == null) {
@@ -57,7 +58,8 @@ public class CardController {
     public ResponseEntity<Card> createCard(@RequestBody Card card) {
         try {
             Card _card = cardsRepository
-                    .save(new Card(card.getName(), card.getDescription(), card.getTag(), card.getStarted(), card.getFinished()));
+                    .save(new Card(card.getName(), card.getDescription(),
+                            card.getTag(), card.getStarted(), card.getFinished()));
             return new ResponseEntity<>(_card, HttpStatus.CREATED);
         } catch (Exception E) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -102,18 +104,14 @@ public class CardController {
 
     @PutMapping("/board/tags")
     public List<String> getTags(@RequestBody ArrayList<Card> cards) {
-
-        System.out.println(cards.size());
         List<String> tags = new ArrayList<>();
         for (Card card : cards) {
             String tag = card.getTag();
-            //System.out.println(tag);
             if (!tags.contains(card.getTag())) {
                 tags.add(tag);
             }
 
         }
-        //System.out.println(cards);
         return tags;
     }
 

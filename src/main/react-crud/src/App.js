@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Routes, Link, Route, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import AddBug from "./components/add-bug.component";
-import Bug from "./components/bug.component";
-import BugsList from "./components/bugs-list.component";
+import AddCard from "./components/add-card.component";
+import Card from "./components/card.component";
+import CardsList from "./components/cards-list.component";
 
 
 
@@ -31,10 +31,10 @@ class App extends Component {
       </nav>
       <div className="container mt-3">
         <Routes>
-          <Route exact path="/" element={<BugsList/>} />
-          <Route exact path="board" element={<BugsList/>} />
-          <Route exact path="/add" element={<AddBug/>} />
-          <Route path="board/:id"  element={<Bug/>}/>
+          <Route exact path="/" element={<CardsList/>} />
+          <Route exact path="board" element={<CardsList/>} />
+          <Route exact path="/add" element={<AddCard/>} />
+          <Route path="board/:id"  element={<Card/>}/>
         </Routes>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {useParams} from "react-router-dom";
-import BugDataService from "../services/bug.service";
+import CardDataService from "../services/card.service";
 
 export function withRouter(Children){
     return(props)=>{
@@ -9,7 +9,7 @@ export function withRouter(Children){
     }
 }
 
-class Bug extends Component {
+class Card extends Component {
     constructor(props) {
         super(props);
         console.log(this.props.match.params.id);
@@ -18,11 +18,11 @@ class Bug extends Component {
         this.onChangeTag = this.onChangeTag.bind(this);
         this.onChangeStarted = this.onChangeStarted.bind(this);
         this.onChangeFinished = this.onChangeFinished.bind(this);
-        this.getBug = this.getBug.bind(this);
-        this.updateBug = this.updateBug.bind(this);
-        this.deleteBug = this.deleteBug.bind(this);
+        this.getCard = this.getCard.bind(this);
+        this.updateCard = this.updateCard.bind(this);
+        this.deleteCard = this.deleteCard.bind(this);
         this.state = {
-            currentBug: {
+            currentCard: {
                 id: null,
                 name: "",
                 description: "",
@@ -36,7 +36,7 @@ class Bug extends Component {
 
     componentDidMount() {
 
-        this.getBug(this.props.match.params.id);
+        this.getCard(this.props.match.params.id);
 
     }
 
@@ -44,8 +44,8 @@ class Bug extends Component {
         const name = e.target.value;
         this.setState(function (prevState) {
             return {
-                currentBug: {
-                    ...prevState.currentBug,
+                currentCard: {
+                    ...prevState.currentCard,
                     name: name
                 }
             };
@@ -56,8 +56,8 @@ class Bug extends Component {
         const description = e.target.value;
         this.setState(function (prevState) {
             return {
-                currentBug: {
-                    ...prevState.currentBug,
+                currentCard: {
+                    ...prevState.currentCard,
                     description: description
                 }
             };
@@ -68,8 +68,8 @@ class Bug extends Component {
         const tag = e.target.value;
         this.setState(function (prevState) {
             return {
-                currentBug: {
-                    ...prevState.currentBug,
+                currentCard: {
+                    ...prevState.currentCard,
                     tag: tag
                 }
             };
@@ -80,8 +80,8 @@ class Bug extends Component {
         const started = e.target.value;
         this.setState(function (prevState) {
             return {
-                currentBug: {
-                    ...prevState.currentBug,
+                currentCard: {
+                    ...prevState.currentCard,
                     started: started
                 }
             }
@@ -92,19 +92,19 @@ class Bug extends Component {
         const finished = e.target.value;
         this.setState(function (prevState) {
             return {
-                currentBug: {
-                    ...prevState.currentBug,
+                currentCard: {
+                    ...prevState.currentCard,
                     finished: finished
                 }
             }
         });
     }
 
-    getBug(id) {
-        BugDataService.get(id)
+    getCard(id) {
+        CardDataService.get(id)
             .then(response => {
                 this.setState({
-                    currentBug: response.data
+                    currentCard: response.data
                 });
                 console.log(response.data);
             })
@@ -114,12 +114,12 @@ class Bug extends Component {
     }
 
 
-    updateBug() {
-        console.log(this.state.currentBug);
-        BugDataService.update(
-            this.state.currentBug.id,
+    updateCard() {
+        console.log(this.state.currentCard);
+        CardDataService.update(
+            this.state.currentCard.id,
 
-            this.state.currentBug
+            this.state.currentCard
         )
             .then(response => {
                 console.log(response.data);
@@ -132,8 +132,8 @@ class Bug extends Component {
             });
     }
 
-    deleteBug() {
-        BugDataService.delete(this.state.currentBug.id)
+    deleteCard() {
+        CardDataService.delete(this.state.currentCard.id)
             .then(response => {
                 console.log(response.data);
                 this.setState({
@@ -146,10 +146,10 @@ class Bug extends Component {
             });
     }
     render () {
-        const { currentBug } = this.state;
+        const { currentCard } = this.state;
         return (
             <div>
-                {currentBug ? (
+                {currentCard ? (
                     <div className="edit-form boardCard boardEdit">
                         <h4 className="title-center">Card Edit</h4>
                         <form>
@@ -159,7 +159,7 @@ class Bug extends Component {
                                     type="text"
                                     className="form-control"
                                     id="name"
-                                    value={currentBug.name}
+                                    value={currentCard.name}
                                     onChange={this.onChangeName}
                                 />
                             </div>
@@ -169,7 +169,7 @@ class Bug extends Component {
                                     type="text"
                                     className="form-control"
                                     id="description"
-                                    value={currentBug.description}
+                                    value={currentCard.description}
                                     onChange={this.onChangeDescription}
                                 />
 
@@ -180,17 +180,17 @@ class Bug extends Component {
                                 type="text"
                                 className="form-control"
                                 id="tag"
-                                value={currentBug.tag}
+                                value={currentCard.tag}
                                 onChange={this.onChangeTag}
                             />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="started">Started</label>
+                                <label htmlFor="started">Created</label>
                                 <input
                                     type="text"
                                     className="form-control"
                                     id="started"
-                                    value={currentBug.started}
+                                    value={currentCard.started}
                                     onChange={this.onChangeStarted}
                                 />
                             </div>
@@ -200,7 +200,7 @@ class Bug extends Component {
                                     type="text"
                                     className="form-control"
                                     id="started"
-                                    value={currentBug.finished}
+                                    value={currentCard.finished}
                                     onChange={this.onChangeFinished}
                                     />
                             </div>
@@ -211,14 +211,14 @@ class Bug extends Component {
                         <button
                             type="submit"
                             className="btn btn-success"
-                            onClick={this.updateBug}
+                            onClick={this.updateCard}
                         >
                             Update
                         </button>
                         <button
                             type="submit"
                             className="btn btn-danger"
-                            onClick={this.deleteBug}
+                            onClick={this.deleteCard}
                         >
                             Delete
                         </button>
@@ -227,11 +227,11 @@ class Bug extends Component {
                 ) : (
                     <div>
                         <br />
-                        <p>Please click on a Bug...</p>
+                        <p>Please click on a Card...</p>
                     </div>
                 )}
             </div>
         );
     }
 }
-export default withRouter(Bug);
+export default withRouter(Card);

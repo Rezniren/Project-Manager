@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GDataService from "../services/bug.service";
+import GDataService from "../services/card.service";
 export default class AddG extends Component {
     constructor(props) {
         super(props);
@@ -113,7 +113,7 @@ export default class AddG extends Component {
                             <label htmlFor="description">Description</label>
                             <input
                                 type="text"
-                                className="form-control"
+                                className="form-control description-input"
                                 id="description"
                                 required
                                 value={this.state.description}
@@ -134,7 +134,7 @@ export default class AddG extends Component {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="started">Started</label>
+                            <label htmlFor="started">Created</label>
                             <input
                                 type="text"
                                 className="form-control"

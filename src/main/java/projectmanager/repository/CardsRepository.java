@@ -1,6 +1,6 @@
-package bugtracker.repository;
+package projectmanager.repository;
 
-import bugtracker.model.Card;
+import projectmanager.model.Card;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

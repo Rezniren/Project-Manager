@@ -1,27 +1,27 @@
 import React, { Component } from "react";
-import BugDataService from "../services/bug.service";
+import CardDataService from "../services/card.service";
 import { Link } from "react-router-dom";
 
 
 
 
-export default class BugsList extends Component {
+export default class CardsList extends Component {
     constructor(props) {
         super(props);
         this.onChangeSearchName = this.onChangeSearchName.bind(this);
-        this.retrieveBugs = this.retrieveBugs.bind(this);
+        this.retrieveCards = this.retrieveCards.bind(this);
 
 
         this.generateTags = this.generateTags.bind(this);
 
 
         this.refreshList = this.refreshList.bind(this);
-        this.setActiveBug = this.setActiveBug.bind(this);
-        this.removeAllBugs = this.removeAllBugs.bind(this);
+        this.setActiveCard = this.setActiveCard.bind(this);
+        this.removeAllCards = this.removeAllCards.bind(this);
         this.searchName = this.searchName.bind(this);
         this.state = {
-            bugs: [],
-            currentBug: null,
+            cards: [],
+            currentCard: null,
             currentIndex: -1,
             searchName: "",
             tags: []
@@ -29,7 +29,7 @@ export default class BugsList extends Component {
 
     }
     componentDidMount() {
-        this.retrieveBugs();
+        this.retrieveCards();
     }
     onChangeSearchName(e) {
         const searchName = e.target.value;
@@ -37,15 +37,14 @@ export default class BugsList extends Component {
             searchName: searchName
         });
     }
-    retrieveBugs() {
-        BugDataService.getAll()
+    retrieveCards() {
+        CardDataService.getAll()
             .then(response => {
                 this.setState({
-                    bugs: response.data
+                    cards: response.data
 
                 });
                 this.generateTags(response.data)
-                //console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -54,7 +53,7 @@ export default class BugsList extends Component {
     }
 
     generateTags(data) {
-        BugDataService.getTags(data)
+        CardDataService.getTags(data)
             .then(response => {
                 this.setState({
                     tags: response.data
@@ -69,20 +68,20 @@ export default class BugsList extends Component {
 
 
     refreshList() {
-        this.retrieveBugs();
+        this.retrieveCards();
         this.setState({
-            currentBug: null,
+            currentCard: null,
             currentIndex: -1
         });
     }
-    setActiveBug(bug, index) {
+    setActiveCard(card, index) {
         this.setState({
-            currentBug: bug,
+            currentCard: card,
             currentIndex: index
         });
     }
-    removeAllBugs() {
-        BugDataService.deleteAll()
+    removeAllCards() {
+        CardDataService.deleteAll()
             .then(response => {
                 console.log(response.data);
                 this.refreshList();
@@ -92,10 +91,10 @@ export default class BugsList extends Component {
             });
     }
     searchName() {
-        BugDataService.findByName(this.state.searchName)
+        CardDataService.findByName(this.state.searchName)
             .then(response => {
                 this.setState({
-                    bugs: response.data
+                    cards: response.data
                 });
                 console.log(response.data);
             })
@@ -105,8 +104,8 @@ export default class BugsList extends Component {
         }
 
     render() {
-        const { searchName, currentBug, currentIndex, tags} = this.state;
-        let { bugs } = this.state;
+        const { searchName, currentCard, currentIndex, tags} = this.state;
+        let { cards } = this.state;
         return (
             <div className="list row">
                 <div className="col-md-8">
@@ -131,8 +130,6 @@ export default class BugsList extends Component {
                 </div>
                 <div className="col-md-6">
 
-
-
                     <ul className="list-group">
                         {tags &&
                             tags.map((tag, index) => (
@@ -142,17 +139,17 @@ export default class BugsList extends Component {
 
                                     <ul className="list-group">
 
-                                    {bugs &&
-                                        bugs.filter(bug => bug.tag === tag).map((bug, indexed) => (
+                                    {cards &&
+                                        cards.filter(card => card.tag === tag).map((card, indexed) => (
                                             <li
                                                 className={
                                                     "list-group-item " +
                                                     (tag + indexed === currentIndex ? "active" : "")
                                                 }
-                                                onClick={() => this.setActiveBug(bug, tag + indexed)}
+                                                onClick={() => this.setActiveCard(card, tag + indexed)}
                                                 key={tag + indexed}>
 
-                                                {bug.name}
+                                                {card.name}
 
                                             </li>
                                         ))}
@@ -165,49 +162,47 @@ export default class BugsList extends Component {
 
                 </div>
                 <div className="col-md-6">
-                    {currentBug ? (
+                    {currentCard ? (
                         <div className="boardCard">
-                            <h4>Card</h4>
-                            <div>
-                                <label>
-                                    <strong>Name:</strong>
-                                </label>{" "}
-                                {currentBug.name}
-                            </div>
-                            <br/>
+                            <h4 className="title-center"><strong>{currentCard.name}</strong></h4>
                             <div>
                                 <label>
                                     <strong>Description:</strong>
                                 </label>{" "}
-                                {currentBug.description}
+                                {currentCard.description}
                             </div>
                             <br/>
                             {<div>
                                 <label>
                                     <strong>Tag:</strong>
                                 </label>{" "}
-                                {currentBug.tag}
+                                {currentCard.tag}
                             </div>}
                             <br/>
                             <div>
                                 <label>
                                     <strong>Created:</strong>
                                 </label>{" "}
-                                {currentBug.started}
+                                {currentCard.started}
                             </div>
-                            <div>
+                            {(currentCard.finished !== "") ? (<div>
                                 <label>
                                     <strong>Finished:</strong>
                                 </label>{" "}
-                                {currentBug.finished}
-                            </div>
-                            <Link
-                                to={"/board/" + currentBug.id}
+                                {currentCard.finished}
+                            </div>): (<div/>)}
 
-                                className="badge badge-warning"
-                            >
-                                Edit
-                            </Link>
+                            <br/>
+
+                            <div className="card-edit">
+                                <Link
+                                to={"/board/" + currentCard.id}
+
+                                className="badge badge-warning">
+                                    Edit
+                                </Link>
+                            </div>
+
 
                         </div>
                     ) : (

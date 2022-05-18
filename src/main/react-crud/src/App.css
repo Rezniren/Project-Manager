@@ -12,7 +12,6 @@ body {
   padding-left: 15px;
   color: #bf616a;
 }
-
 .list {
   text-align: left;
   max-width: 750px;
@@ -35,16 +34,19 @@ body {
  }
 
 .boardCard {
-
+  margin-top: 8px;
   background-color: #4c566a;
   color: #d8dee9;
   border-radius: .25rem;
   padding: 8px;
 }
 .title-center {
+  text-align: left;
+  padding: 16px;
+}
+.card-edit {
   text-align: center;
 }
-
 .CategoryList {
   background-color: #434c5e;
   padding: 8px;
@@ -52,7 +54,6 @@ body {
   margin-top: 8px;
   list-style: none;
 }
-
 
 .list-group-item {
   background-color: #3b4252;
@@ -63,6 +64,9 @@ body {
 .list-group-item.active {
   background-color: #5e81ac;
   border-color: transparent;
+}
+
+.description-input {
 }
 
 .badge {
