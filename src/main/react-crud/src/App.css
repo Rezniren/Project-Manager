@@ -1,5 +1,5 @@
 body {
-  font-family: "MesloLGS NF", serif;
+  font-family: "MesloLGS NF", sans-serif;
   background-color: #2e3440;
   color: #e5e9f0;
 }
@@ -8,7 +8,8 @@ body {
    background-color: #3b4252;
  }
 .navbar-brand {
-  font-family: "Herculanum", "Comic Code", serif;
+  font-family: "Nasalization", "Nasalization", sans-serif;
+  font-weight: bold;
   padding-left: 15px;
   color: #bf616a;
 }
@@ -32,6 +33,16 @@ body {
 .form-control:focus {
    box-shadow: none;
  }
+.form-group {
+  margin-bottom: 8px;
+}
+.radio-tags {
+  margin-top: 8px;
+}
+.tag-button {
+  margin-right: 8px;
+  margin-bottom: 10px;
+}
 
 .boardCard {
   margin-top: 8px;
@@ -58,7 +69,7 @@ body {
 .list-group-item {
   background-color: #3b4252;
   color: #d8dee9;
-  font-family:  "MesloLGS NF", "Comic Code", "Fantasque Sans Mono", sans-serif;
+  font-family:  "MesloLGS NF", sans-serif;
   font-weight: bold;
 }
 .list-group-item.active {

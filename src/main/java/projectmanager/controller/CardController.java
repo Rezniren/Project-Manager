@@ -27,7 +27,7 @@ public class CardController {
     public ResponseEntity<List<Card>> getAllCards(@RequestParam(required = false) String name,
                                                   @RequestParam(required = false) String tag) {
         try {
-            List<Card> cards = new ArrayList<Card>();
+            List<Card> cards = new ArrayList<>();
             if (name == null && tag == null) {
                 cardsRepository.findAll().forEach(cards::add);
             } else if (name != null && tag == null){

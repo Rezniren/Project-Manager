@@ -175,14 +175,31 @@ class Card extends Component {
 
                             </div>
                             <div className="form-group">
-                            <label htmlFor="tag">Tag</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="tag"
-                                value={currentCard.tag}
-                                onChange={this.onChangeTag}
-                            />
+                                <label htmlFor="tag">Tag</label>
+                                <div className="radio-tags" onChange={this.onChangeTag}>
+                                    <div><input className="tag-button"
+                                                type="radio"
+                                                value="TODO"
+                                                name="tag"
+                                    />
+                                        <label>TODO</label>
+                                    </div>
+                                    <div><input className="tag-button"
+                                                type="radio"
+                                                value="In Progress"
+                                                name="tag"
+                                    />
+
+                                        <label>In Progress</label>
+                                    </div>
+                                    <div><input className="tag-button"
+                                                type="radio"
+                                                value="Complete"
+                                                name="tag"
+                                    />
+                                        <label>Complete</label>
+                                    </div>
+                                </div>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="started">Created</label>
