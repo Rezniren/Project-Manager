@@ -162,11 +162,12 @@ export default class CardsList extends Component {
 
 
 
+
                 </div>
                 <div className="col-md-6">
                     {currentCard ? (
                         <div className="boardCard">
-                            <h4 className="title-center"><strong>{currentCard.name}</strong></h4>
+                            <h4 className="title-center card-title-font"><strong>{currentCard.name}</strong></h4>
                             <div>
                                 <label>
                                     <strong>Description:</strong>
