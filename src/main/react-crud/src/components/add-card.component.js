@@ -84,7 +84,7 @@ export default class AddG extends Component {
         });
     }
     render() {
-        // ...
+        let tagList = ["TODO", "In Progress", "Complete"];
         return (
             <div className="submit-form">
                 {this.state.submitted ? (
@@ -96,7 +96,7 @@ export default class AddG extends Component {
                     </div>
                 ) : (
                     <div className="boardCard">
-                        <h4 className="title-center">Card Creation</h4>
+                        <h4 className="title-center card-category-name">Card Creation</h4>
                         <div className="form-group">
                             <label htmlFor="name">Name</label>
                             <input
@@ -122,34 +122,23 @@ export default class AddG extends Component {
                             />
                         </div>
 
-
-
                         <div className="form-group">
                             <label htmlFor="tag">Tag</label>
-                            <div className="radio-tags" onChange={this.onChangeTag}>
-                                <div><input className="tag-button"
-                                            type="radio"
-                                            value="TODO"
-                                            name="tag"/>
-                                    <label>TODO</label>
-                                </div>
-                                <div><input className="tag-button"
-                                            type="radio"
-                                            value="In Progress"
-                                            name="tag"/>
-                                    <label>In Progress</label>
-                                </div>
-                                <div><input className="tag-button"
-                                            type="radio"
-                                            value="Complete"
-                                            name="tag"/>
-                                    <label>Complete</label>
-                                </div>
+                            <div className="radio-tags">
+                                {tagList && tagList.map((tag, index) => (
+                                    <div className={(tag + index)}
+                                         key={index}>
+                                        <input className={"tag-button"}
+                                               type="radio"
+                                               value={tag}
+                                               name={tag}
+                                               onChange={this.onChangeTag}
+                                        />
+                                        {tag}
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                        
-
-                        
                         
                         <div className="form-group">
                             <label htmlFor="started">Created</label>
@@ -181,6 +170,7 @@ export default class AddG extends Component {
                     </div>
                 )}
             </div>
+
         );
     }
 }

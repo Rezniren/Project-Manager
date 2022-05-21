@@ -1,5 +1,5 @@
 body {
-  font-family: "MesloLGS NF", sans-serif;
+  font-family: "JetBrains Mono", "Meslo LGS NF", sans-serif;
   background-color: #2e3440;
   color: #e5e9f0;
 }
@@ -8,7 +8,7 @@ body {
    background-color: #3b4252;
  }
 .navbar-brand {
-  font-family: "Nasalization", "Nasalization", sans-serif;
+  font-family: "Nasalization", "Meslo LGS NF", sans-serif;
   font-weight: bold;
   padding-left: 15px;
   color: #bf616a;
@@ -65,12 +65,15 @@ body {
   margin-top: 8px;
   list-style: none;
 }
+.card-category-name {
+  font-family: Nasalization, "MesloLGS NF", sans-serif;
+}
 
 .list-group-item {
   background-color: #3b4252;
   color: #d8dee9;
-  font-family:  "MesloLGS NF", sans-serif;
-  font-weight: bold;
+  font-family:  "JetBrains Mono", "MesloLGS NF", sans-serif;
+  font-weight: normal;
 }
 .list-group-item.active {
   background-color: #5e81ac;

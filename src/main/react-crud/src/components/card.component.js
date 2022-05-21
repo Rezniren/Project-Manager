@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {useParams} from "react-router-dom";
 import CardDataService from "../services/card.service";
 
-export function withRouter(Children){
-    return(props)=>{
-        const match  = {params: useParams()};
-        return <Children {...props}  match = {match}/>
+export function withRouter(Children) {
+    return (props) => {
+        const match = {params: useParams()};
+        return <Children {...props} match={match}/>
     }
 }
 
@@ -21,6 +21,7 @@ class Card extends Component {
         this.getCard = this.getCard.bind(this);
         this.updateCard = this.updateCard.bind(this);
         this.deleteCard = this.deleteCard.bind(this);
+
         this.state = {
             currentCard: {
                 id: null,
@@ -28,16 +29,14 @@ class Card extends Component {
                 description: "",
                 tag: "",
                 started: "",
-                finished: ""
+                finished: "",
             },
             message: ""
         };
     }
 
     componentDidMount() {
-
         this.getCard(this.props.match.params.id);
-
     }
 
     onChangeName(e) {
@@ -118,7 +117,6 @@ class Card extends Component {
         console.log(this.state.currentCard);
         CardDataService.update(
             this.state.currentCard.id,
-
             this.state.currentCard
         )
             .then(response => {
@@ -139,19 +137,20 @@ class Card extends Component {
                 this.setState({
                     message: "The Card was deleted successfully!"
                 });
-
             })
             .catch(e => {
                 console.log(e);
             });
     }
-    render () {
-        const { currentCard } = this.state;
+
+    render() {
+        const {currentCard} = this.state;
+        let tagList = ["TODO", "In Progress", "Complete"];
         return (
             <div>
                 {currentCard ? (
                     <div className="edit-form boardCard boardEdit">
-                        <h4 className="title-center">Card Edit</h4>
+                        <h4 className="title-center card-category-name">Card Edit</h4>
                         <form>
                             <div className="form-group">
                                 <label htmlFor="name">Name</label>
@@ -172,35 +171,29 @@ class Card extends Component {
                                     value={currentCard.description}
                                     onChange={this.onChangeDescription}
                                 />
-
                             </div>
+
+
                             <div className="form-group">
                                 <label htmlFor="tag">Tag</label>
-                                <div className="radio-tags" onChange={this.onChangeTag}>
-                                    <div><input className="tag-button"
-                                                type="radio"
-                                                value="TODO"
-                                                name="tag"
-                                    />
-                                        <label>TODO</label>
-                                    </div>
-                                    <div><input className="tag-button"
-                                                type="radio"
-                                                value="In Progress"
-                                                name="tag"
-                                    />
-
-                                        <label>In Progress</label>
-                                    </div>
-                                    <div><input className="tag-button"
-                                                type="radio"
-                                                value="Complete"
-                                                name="tag"
-                                    />
-                                        <label>Complete</label>
-                                    </div>
+                                <div className="radio-tags">
+                                    {tagList && tagList.map((tag, index) => (
+                                        <div className={(tag + index)}
+                                             key={index}>
+                                            <input className={"tag-button"}
+                                                   type="radio"
+                                                   checked={currentCard.tag === tag}
+                                                   value={tag}
+                                                   name={tag}
+                                                   onChange={this.onChangeTag}
+                                            />
+                                            {tag}
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
+
+
                             <div className="form-group">
                                 <label htmlFor="started">Created</label>
                                 <input
@@ -219,12 +212,9 @@ class Card extends Component {
                                     id="started"
                                     value={currentCard.finished}
                                     onChange={this.onChangeFinished}
-                                    />
+                                />
                             </div>
-
                         </form>
-
-
                         <button
                             type="submit"
                             className="btn btn-success"
@@ -243,7 +233,7 @@ class Card extends Component {
                     </div>
                 ) : (
                     <div>
-                        <br />
+                        <br/>
                         <p>Please click on a Card...</p>
                     </div>
                 )}
@@ -251,4 +241,5 @@ class Card extends Component {
         );
     }
 }
+
 export default withRouter(Card);

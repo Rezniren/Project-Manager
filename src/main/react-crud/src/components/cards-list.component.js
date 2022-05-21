@@ -104,8 +104,10 @@ export default class CardsList extends Component {
         }
 
     render() {
-        const { searchName, currentCard, currentIndex, tags} = this.state;
+        const { searchName, currentCard, currentIndex} = this.state;
         let { cards } = this.state;
+        let tags =  ["TODO", "In Progress", "Complete"];
+        //let { tags } = this.state;
         return (
             <div className="list row">
                 <div className="col-md-8">
@@ -135,7 +137,7 @@ export default class CardsList extends Component {
                             tags.map((tag, index) => (
                                 <li className="CategoryList" key={index}>
 
-                                    <h4>{tag}</h4>
+                                    <h4 className="card-category-name">{tag}</h4>
 
                                     <ul className="list-group">
 

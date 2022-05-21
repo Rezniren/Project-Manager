@@ -1,11 +1,11 @@
 
 body {
   margin: 0;
-  font-family: "MesloLGS NF", serif;
+  font-family: "JetBrains Mono", "Meslo LGS NF", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: "Comic Code Ligatures", monospace;
+  font-family: "Comic Code Ligatures", "Meslo LGS NF", monospace;
 }
