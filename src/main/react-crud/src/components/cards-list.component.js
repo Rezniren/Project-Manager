@@ -110,7 +110,7 @@ export default class CardsList extends Component {
         //let { tags } = this.state;
         return (
             <div className="list row">
-                <div className="col-md-8">
+                <div>
                     <div className="input-group mb-3">
                         <input
                             type="text"
@@ -130,9 +130,9 @@ export default class CardsList extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-6">
+                <div className="category-container">
 
-                    <ul className="list-group">
+                    <ul className="category-inline">
                         {tags &&
                             tags.map((tag, index) => (
                                 <li className="CategoryList" key={index}>
@@ -164,7 +164,7 @@ export default class CardsList extends Component {
 
 
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-6 location">
                     {currentCard ? (
                         <div className="boardCard">
                             <h4 className="title-center card-title-font"><strong>{currentCard.name}</strong></h4>

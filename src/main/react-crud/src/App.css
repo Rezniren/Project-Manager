@@ -72,6 +72,7 @@ body {
   font-family: "Nasalization", "MesloLGS NF", sans-serif;
 }
 
+
 .list-group-item {
   background-color: #3b4252;
   color: #d8dee9;
@@ -81,6 +82,21 @@ body {
 .list-group-item.active {
   background-color: #5e81ac;
   border-color: transparent;
+}
+
+.category-container {
+}
+
+.category-inline {
+  padding: 1px;
+  display: flex;
+}
+.category-inline > * {
+  flex-basis: 100%;
+  margin-right: 8px;
+}
+.location {
+  margin: auto;
 }
 
 .description-input {
