@@ -105,7 +105,7 @@ export default class CardsList extends Component {
     render() {
         const { searchName, currentCard, currentIndex} = this.state;
         let { cards } = this.state;
-        let tags =  ["TODO", "In Progress", "Complete", "test1", "test2"];
+        let tags =  ["TODO", "In Progress", "Complete"];
         //let { tags } = this.state;
         return (
             <div className="list row">
@@ -209,8 +209,7 @@ export default class CardsList extends Component {
                         </div>
                     ) : (
                         <div>
-                            <br />
-                            <p>Please click on a Card Name...</p>
+                            <br/>
                         </div>
                     )}
                 </div>
