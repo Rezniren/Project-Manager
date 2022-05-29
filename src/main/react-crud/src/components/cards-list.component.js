@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 
 
-
 export default class CardsList extends Component {
     constructor(props) {
         super(props);
@@ -106,7 +105,7 @@ export default class CardsList extends Component {
     render() {
         const { searchName, currentCard, currentIndex} = this.state;
         let { cards } = this.state;
-        let tags =  ["TODO", "In Progress", "Complete"];
+        let tags =  ["TODO", "In Progress", "Complete", "test1", "test2"];
         //let { tags } = this.state;
         return (
             <div className="list row">
@@ -164,7 +163,7 @@ export default class CardsList extends Component {
 
 
                 </div>
-                <div className="col-md-6 location">
+                <div className="col-6 location">
                     {currentCard ? (
                         <div className="boardCard">
                             <h4 className="title-center card-title-font"><strong>{currentCard.name}</strong></h4>

@@ -2,17 +2,20 @@ body {
   font-family: "JetBrains Mono", "Meslo LGS NF", sans-serif;
   background-color: #2e3440;
   color: #e5e9f0;
+  /*text-shadow: 1px 1px #000000;*/
 }
 
 .navbar {
    background-color: #3b4252;
  }
+
 .navbar-brand {
   font-family: "Nasalization", "Meslo LGS NF", sans-serif;
   font-weight: bold;
   padding-left: 15px;
   color: #bf616a;
 }
+
 .list {
   text-align: left;
   max-width: 750px;
@@ -23,22 +26,28 @@ body {
   max-width: 300px;
   margin: auto;
 }
+
 .edit-form {
   max-width: 300px;
   margin: auto;
 }
+
 .form-control {
   background-color: #d8dee9;
 }
+
 .form-control:focus {
    box-shadow: none;
  }
+
 .form-group {
   margin-bottom: 8px;
 }
+
 .radio-tags {
   margin-top: 8px;
 }
+
 .tag-button {
   margin-right: 8px;
   margin-bottom: 10px;
@@ -50,35 +59,45 @@ body {
   color: #d8dee9;
   border-radius: .25rem;
   padding: 8px;
+  filter: drop-shadow(4px 4px #000);
 }
+
 .title-center {
   text-align: left;
   padding: 16px;
 }
+
 .card-title-font {
   font-family: "Nasalization", "ITC Avant Garde Gothic std", sans-serif;
+  text-shadow: 1px 2px #000000;
 }
+
 .card-edit {
   text-align: center;
 }
+
 .CategoryList {
   background-color: #434c5e;
   padding: 8px;
   border-radius: .25rem;
   margin-top: 8px;
   list-style: none;
-}
-.card-category-name {
-  font-family: "Nasalization", "MesloLGS NF", sans-serif;
+  filter: drop-shadow(4px 4px #000);
 }
 
+.card-category-name {
+  font-family: "Nasalization", "MesloLGS NF", sans-serif;
+  text-shadow: 1px 2px #000000;
+}
 
 .list-group-item {
   background-color: #3b4252;
   color: #d8dee9;
   font-family:  "JetBrains Mono", "MesloLGS NF", sans-serif;
   font-weight: normal;
+  /*text-shadow: 1px 1px #000000;*/
 }
+
 .list-group-item.active {
   background-color: #5e81ac;
   border-color: transparent;
@@ -91,10 +110,23 @@ body {
   padding: 1px;
   display: flex;
 }
+
 .category-inline > * {
-  flex-basis: 100%;
-  margin-right: 8px;
+  /*flex: 1 2 100%;*/
+  margin-right: 16px;
 }
+
+@media only screen and (max-width: 770px) {
+  .category-inline {
+    flex-direction: column;
+  }
+  .boardCard {
+
+    min-width: 332px;
+  }
+}
+
+
 .location {
   margin: auto;
 }
@@ -117,19 +149,23 @@ body {
    color: #2e3440;
    margin-right: 5px;
  }
+
 .btn-success {
   margin-top: 8px;
   border-color: transparent;
 }
+
 .btn-success:hover {
   background-color: #a3be8c;
   border-color: transparent;
 }
+
 .btn-danger {
   margin-top: 8px;
   background-color: #bf616a;
   border-color: transparent;
 }
+
 .btn-danger:hover {
   background-color: #d08770;
   border-color: transparent;

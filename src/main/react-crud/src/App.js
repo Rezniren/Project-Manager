@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Routes, Link, Route, useParams } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import AddCard from "./components/add-card.component";

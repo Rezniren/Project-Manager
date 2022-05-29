@@ -29,11 +29,11 @@ public class CardController {
         try {
             List<Card> cards = new ArrayList<>();
             if (name == null && tag == null) {
-                cardsRepository.findAll().forEach(cards::add);
+                cards.addAll(cardsRepository.findAll());
             } else if (name != null && tag == null){
-                cardsRepository.findByNameContaining(name).forEach(cards::add);
+                cards.addAll(cardsRepository.findByNameContaining(name));
             } else {
-                cardsRepository.findByTag(tag).forEach(cards::add);
+                cards.addAll(cardsRepository.findByTag(tag));
             }
             if (cards.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -47,11 +47,9 @@ public class CardController {
     @GetMapping("/board/{id}")
     public ResponseEntity<Card> getCardById(@PathVariable("id") long id) {
         Optional<Card> cardData = cardsRepository.findById(id);
-        if (cardData.isPresent()) {
-            return new ResponseEntity<>(cardData.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return cardData.map(card
+                -> new ResponseEntity<>(card, HttpStatus.OK)).orElseGet(()
+                -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/board")

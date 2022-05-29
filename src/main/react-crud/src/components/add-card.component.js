@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GDataService from "../services/card.service";
+import CardDataService from "../services/card.service";
 export default class AddG extends Component {
     constructor(props) {
         super(props);
@@ -8,8 +8,8 @@ export default class AddG extends Component {
         this.onChangeTag = this.onChangeTag.bind(this);
         this.onChangeStarted = this.onChangeStarted.bind(this);
         this.onChangeStarted = this.onChangeStarted.bind(this);
-        this.saveG = this.saveG.bind(this);
-        this.newG = this.newG.bind(this);
+        this.saveCard = this.saveCard.bind(this);
+        this.newCard = this.newCard.bind(this);
         const today = new Date(),
             date = (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getFullYear();
         this.state = {
@@ -48,7 +48,7 @@ export default class AddG extends Component {
             finished: e.target.value
         })
     }
-    saveG() {
+    saveCard() {
         let data = {
             name: this.state.name,
             description: this.state.description,
@@ -56,7 +56,7 @@ export default class AddG extends Component {
             started: this.state.started,
             finished: this.state.finished
         };
-        GDataService.create(data)
+        CardDataService.create(data)
             .then(response => {
                 this.setState({
                     id: response.data.id,
@@ -73,7 +73,7 @@ export default class AddG extends Component {
                 console.log(e);
             });
     }
-    newG() {
+    newCard() {
         this.setState({
             id: null,
             name: "",
@@ -90,7 +90,7 @@ export default class AddG extends Component {
                 {this.state.submitted ? (
                     <div>
                         <h4>You submitted successfully!</h4>
-                        <button className="btn btn-success" onClick={this.newG}>
+                        <button className="btn btn-success" onClick={this.newCard}>
                             Add
                         </button>
                     </div>
@@ -164,7 +164,7 @@ export default class AddG extends Component {
                                 name="finished"
                             />
                         </div>
-                        <button onClick={this.saveG} className="btn btn-success">
+                        <button onClick={this.saveCard} className="btn btn-success">
                             Submit
                         </button>
                     </div>
