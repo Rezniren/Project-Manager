@@ -111,8 +111,7 @@ export default class AddG extends Component {
                         </div>
                         <div className="form-group">
                             <label htmlFor="description">Description</label>
-                            <input
-                                type="text"
+                            <textarea
                                 className="form-control description-input"
                                 id="description"
                                 required

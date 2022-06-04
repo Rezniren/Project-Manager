@@ -164,13 +164,11 @@ class Card extends Component {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="description">Description</label>
-                                <input
-                                    type="text"
+                                <textarea
                                     className="form-control"
                                     id="description"
                                     value={currentCard.description}
-                                    onChange={this.onChangeDescription}
-                                />
+                                    onChange={this.onChangeDescription}/>
                             </div>
 
 
