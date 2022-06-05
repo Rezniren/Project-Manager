@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "User")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +25,13 @@ public class User {
     public User(){}
 
     public User(String name, String password, String boards) {
+        super();
         this.name = name;
         this.password = password;
         this.boards = boards;
     }
 
-    public void addToBoard(String item) {
+    public void addBoard(String item) {
         if (this.boards == null) {
             this.boards = item;
         }
