@@ -1,6 +1,8 @@
 package projectmanager.model;
 
 import javax.persistence.*;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -29,13 +31,23 @@ public class User {
         this.boards = boards;
     }
 
-    public void addBoard(String item) {
+    public void addBoard(String board) {
         if (this.boards == null) {
-            this.boards = item;
+            this.boards = board;
         }
         else {
-            this.boards += "," + item;
+            this.boards += "," + board;
         }
+    }
+    public void removeBoard(String board) {
+        if (board.contains(",")) {
+        board = "," + board;
+        }
+        this.boards = this.boards.replaceFirst(board, "");
+    }
+
+    public List<String> getBoardList() {
+        return Arrays.asList(this.boards.split(",", -1));
     }
 
 

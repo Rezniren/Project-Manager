@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import projectmanager.model.Card;
 import projectmanager.model.User;
 import projectmanager.repository.UsersRepository;
 
+import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = {"http://localhost:8081", "http://192.168.1.65:8081"})
+@CrossOrigin(origins = {"http://localhost:8081", "http://192.168.1.65:8081", "http://192.168.1.29:8081"})
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -23,7 +23,7 @@ public class UserController {
         return "login is working!";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login/createUser")
     public ResponseEntity<User> createUser(/*@RequestBody User user*/) {
         try {
              User _user = usersRepository
@@ -34,21 +34,43 @@ public class UserController {
         }
     }
 
-    @PutMapping("/login")
-    public ResponseEntity<User> addBoard() {
-        long id = 1;
+    @GetMapping("/{userid}/boards/getlist")
+    public ResponseEntity<List<String>> getBoardList(@PathVariable("userid") long id) {
         Optional<User> userData = usersRepository.findById(id);
         if (userData.isPresent()) {
             User _user = userData.get();
-            _user.addBoard("TestBoard");
+             return new ResponseEntity<>(_user.getBoardList(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @PutMapping("/{userid}/boards/add")
+    public ResponseEntity<User> addBoard(@PathVariable("userid") long id, @RequestBody String board) {
+        System.out.println("Made it into function");
+        Optional<User> userData = usersRepository.findById(id);
+        if (userData.isPresent()) {
+            User _user = userData.get();
+            _user.addBoard(board);
             return new ResponseEntity<>(usersRepository.save(_user), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    public ResponseEntity<User> removeBoard() {
-        return null;
+    @PutMapping("/{userid}/boards/remove")
+    public ResponseEntity<User> removeBoard(@PathVariable("userid") long id, @RequestBody String board) {
+        System.out.println("Made it into function");
+
+        Optional<User> userData = usersRepository.findById(id);
+        if (userData.isPresent()) {
+            User _user = userData.get();
+            _user.removeBoard(board);
+            return new ResponseEntity<>(usersRepository.save(_user), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 

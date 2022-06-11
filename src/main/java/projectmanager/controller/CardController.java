@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@CrossOrigin(origins = {"http://localhost:8081", "http://192.168.1.65:8081"})
+@CrossOrigin(origins = {"http://localhost:8081", "http://192.168.1.65:8081", "http://192.168.1.29:8081"})
 @RestController
 @RequestMapping("/api")
 public class CardController {
