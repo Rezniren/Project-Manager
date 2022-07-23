@@ -17,18 +17,25 @@ public class User {
     @Column(name = "password")
     private String password;
 
-
+    @Column(name = "userKey")
+    private String userKey;
 
     @Column(name="boards")
     private String boards;
 
     public User(){}
 
-    public User(String name, String password, String boards) {
+    public User(String name, String password, String key, String boards) {
         super();
         this.name = name;
         this.password = password;
         this.boards = boards;
+        this.userKey = key;
+    }
+    public User(String name, String password) {
+        super();
+        this.name = name;
+        this.password = password;
     }
 
     public void addBoard(String board) {
@@ -73,6 +80,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getuserKey() {
+        return userKey;
+    }
+
+    public void setuserKey(String key) {
+        this.userKey = key;
     }
 
     public String getBoards() {

@@ -7,7 +7,6 @@ export default class AddG extends Component {
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeTag = this.onChangeTag.bind(this);
         this.onChangeStarted = this.onChangeStarted.bind(this);
-        this.onChangeStarted = this.onChangeStarted.bind(this);
         this.saveCard = this.saveCard.bind(this);
         this.newCard = this.newCard.bind(this);
         const today = new Date(),

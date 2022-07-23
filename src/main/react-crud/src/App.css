@@ -84,6 +84,11 @@ body {
   list-style: none;
   filter: drop-shadow(4px 4px #000);
 }
+.login {
+  margin: auto;
+  background-color: #4c566a;
+  max-width: 300px;
+}
 
 .card-category-name {
   font-family: "Nasalization", "MesloLGS NF", sans-serif;
